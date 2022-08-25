@@ -1,4 +1,4 @@
-import express from "express";
+import express, { response } from "express";
 
 const server = express();
 
@@ -33,6 +33,12 @@ server.get("/is-today-holiday", (request, response) => {
  // console.log(request)
   response.send(mensagem);
 });
+
+server.get("/holidays/:mes", (require, response) =>{
+    const { mes } = require.params; //require.params.mes
+    const holidaysMonth = holidays.filter(value => value.date.split("/")[0] === mes);
+    response.send(holidaysMonth)
+ })
 
 console.log(holidays);
 server.listen(4000, function () {
