@@ -5,7 +5,6 @@ const server = express();
 const holidays = [
   { date: "1/1/2022", name: "Confraternização mundial" },
   { date: "1/3/2022", name: "Carnaval" },
-  //{ date: "8/25/2022", name: "kassia" },
   { date: "4/17/2022", name: "Páscoa" },
   { date: "4/21/2022", name: "Tiradentes" },
   { date: "5/1/2022", name: "Dia do trabalho" },
@@ -24,13 +23,14 @@ server.get("/holidays", (request, response) => {
 server.get("/is-today-holiday", (request, response) => {
   const hoje = new Date();
   let mensagem = `Não, hoje não é feriado`;
-  
+
   let holiday = holidays.find(
     (value) => value.date === hoje.toLocaleDateString("en-us")
   );
   if (holiday) {
-    mensagem = `Sim, hoje é nome-do-feriado`;
+    mensagem = `Sim, hoje é ${holiday.name}`;
   }
+ // console.log(request)
   response.send(mensagem);
 });
 
